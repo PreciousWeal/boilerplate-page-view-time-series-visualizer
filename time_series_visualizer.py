@@ -65,7 +65,26 @@ def draw_box_plot():
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
 
     # Draw box plots (using Seaborn)
+    # Initialize the figure
+    sns.boxplot(
+    df_box, x="year", y="value", whis =[0, 99], palette="Set2", ax=ax[0],
+    flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
+    )
 
+
+    sns.boxplot(
+        df_box, x="month", y="value", whis =[0, 99], palette="Set2", ax=ax[1],
+        flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
+    )
+
+
+    ax[0].set(ylabel="Page Views")
+    ax[1].set(ylabel="Page Views")
+    ax[0].set_title('Year-wise Box Plot (Trend)')
+    ax[1].set_title('Month-wise Box Plot (Seasonality)')
+
+    # Adjust spacing between the two axes
+    plt.subplots_adjust(wspace=0.3)  # wspace = width space between columns
 
 
 
