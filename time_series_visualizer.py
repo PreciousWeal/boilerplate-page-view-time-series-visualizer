@@ -72,7 +72,11 @@ def draw_box_plot():
     df_box = df.copy()
     df_box.reset_index(inplace=True)
     df_box['year'] = [d.year for d in df_box.date]
-    df_box['month'] = [d.strftime('%b') for d in df_box.date]
+    df_box['month'] = [d.strftime('%b') for d in df_box.date] # %b abbreviate the month 'January' - 'Jan'
+
+    #month order
+    month_order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     # Draw box plots (using Seaborn)
     # Initialize the figure and axes
@@ -85,7 +89,7 @@ def draw_box_plot():
 
     sns.boxplot(
         data = df_box, x="month", y="value", whis =[0, 99], palette="Set2", ax=ax[1],
-        flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
+        flierprops=dict(marker='D', markerfacecolor='black', markersize=2), order=month_order
     )
 
 
