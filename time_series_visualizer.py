@@ -1,3 +1,5 @@
+import numpy as np
+np.float = float  # Patch for deprecated np.float used in seaborn
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -65,15 +67,16 @@ def draw_box_plot():
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
 
     # Draw box plots (using Seaborn)
-    # Initialize the figure
+    # Initialize the figure and axes
+    fig, ax = plt.subplots(ncols=2, figsize=(15, 5))
     sns.boxplot(
-    df_box, x="year", y="value", whis =[0, 99], palette="Set2", ax=ax[0],
-    flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
+        data = df_box, x="year", y="value", whis =[0, 99], palette="Set2", ax=ax[0],
+        flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
     )
 
 
     sns.boxplot(
-        df_box, x="month", y="value", whis =[0, 99], palette="Set2", ax=ax[1],
+        data = df_box, x="month", y="value", whis =[0, 99], palette="Set2", ax=ax[1],
         flierprops=dict(marker='D', markerfacecolor='black', markersize=2)
     )
 
