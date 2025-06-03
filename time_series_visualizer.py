@@ -7,8 +7,11 @@ register_matplotlib_converters()
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
 df = pd.read_csv('fcc-forum-pageviews.csv', index_col = 'date', parse_date = ['date'])
 
+
 # Clean data
-df = None
+low_percentile = df['value'].quantile(0.025)  # 2.5th percentile
+high_percentile = df['value'].quantile(0.975) # 97.5th percentile
+df = df[(df['value'] >= low_percentile) & (df['value'] <= high_percentile)]
 
 
 def draw_line_plot():
