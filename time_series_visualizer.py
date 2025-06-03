@@ -18,7 +18,7 @@ def draw_line_plot():
     # Draw line plot
 
     fig,ax = plt.subplots(figsize=(12,6))
-    ax.plot(df_clean, color = '#A52A2A')
+    ax.plot(df, color = '#A52A2A')
     ax.set_xlabel('Date')
     ax.set_ylabel('Page Views')
     ax.set_title('Daily freeCodeCamp Forum Page Views 5/2016-12/2019')
