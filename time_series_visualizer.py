@@ -38,6 +38,14 @@ def draw_bar_plot():
     df_bar['year'] = df_bar.index.year
     df_bar['month'] = df_bar.index.month_name()
 
+    # Define the correct month order
+    month_order = ['January', 'February', 'March', 'April', 'May', 'June',
+                   'July', 'August', 'September', 'October', 'November', 'December']
+
+    # Convert month column to ordered categorical type
+    df_bar['month'] = pd.Categorical(df_bar['month'], categories=month_order, ordered=True)
+
+    # Group and pivot
     df_bar = df_bar.groupby(['year', 'month'])['value'].mean().unstack()
 
     # Draw bar plot
@@ -49,7 +57,7 @@ def draw_bar_plot():
     ax.legend(title = 'Months')
 
     #set the label
-    ax.set_xlabel('Year')
+    ax.set_xlabel('Years')
     ax.set_ylabel('Average Page Views')
     ax.set_title('Monthly Average Page Views')
 
@@ -81,7 +89,9 @@ def draw_box_plot():
     )
 
 
+    ax[0].set(xlabel="Year")
     ax[0].set(ylabel="Page Views")
+    ax[1].set(xlabel="Month")
     ax[1].set(ylabel="Page Views")
     ax[0].set_title('Year-wise Box Plot (Trend)')
     ax[1].set_title('Month-wise Box Plot (Seasonality)')
